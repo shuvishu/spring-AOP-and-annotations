@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.springframework:spring-aspects:4.3.9.RELEASE" type="repository">
+    <properties maven-id="org.springframework:spring-aspects:4.3.9.RELEASE" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/spring-aspects-4.3.9.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/aspectjweaver-1.8.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.persistence-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

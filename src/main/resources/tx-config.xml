@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:tx="http://www.springframework.org/schema/tx"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <context:component-scan base-package="transactions"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/test1"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="toor"/>
+    </bean>
+
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="account" class="transactions.Account">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean name="accountQ3" class="transactions.AccountQ3">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    
+    <bean name="ques4" class="transactions.Ques4">
+        <property name="account" ref="account"/>
+        <property name="accountService" ref="accountService"/>
+    </bean>
+
+    <bean name="accountService" class="transactions.AccountService">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+</beans>
